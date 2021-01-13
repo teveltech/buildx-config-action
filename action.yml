@@ -1,20 +1,18 @@
 name: 'Tevel Buildx Config'
 description: 'Configuration action for Docker image buildx'
 inputs:
-  file_path:
-    description: path to dockerfile
-    required: false
-    default: "./"
+  tag_name:
+    Docker Image version
+    required: true
   image_name:
     description: registry URL + repo (app name)
     required: true
   target_platform:
-    description: specifing platform amd64 / arm targt 
-    required: true
+    description: specifing platform amd64 / arm target 
     default: "linux/amd64"
-  tag_name:
-    Docker Image version
-    required: true
+  file_path:
+    description: path to dockerfile
+    default: "./"
 outputs:
   buildx_args:
     description: "Docker buildx build args"
