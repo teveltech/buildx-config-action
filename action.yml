@@ -2,7 +2,7 @@ name: 'Tevel Buildx Config'
 description: 'Configuration action for Docker image buildx'
 inputs:
   tag_name:
-    Docker Image version
+    description: Docker Image version
     required: true
   image_name:
     description: registry URL + repo (app name)
