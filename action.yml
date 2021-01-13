@@ -22,7 +22,7 @@ runs:
   steps: 
     - name: Prepare
       id: prepare
-      shell: sh
+      shell: bash
       run: |
         TAGS="--tag ${{ inputs.image_name }}:${{ inputs.tag_name }}"
 
