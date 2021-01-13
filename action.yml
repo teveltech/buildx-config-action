@@ -30,4 +30,4 @@ runs:
           --build-arg VERSION=${{ inputs.tag_name }} \
           --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
           --build-arg VCS_REF=${GITHUB_SHA::8} \
-          ${TAGS} --file ${{ inputs.file_path }}/Dockerfile ${{ inputs.file_path }}
+          ${TAGS} --file ${{ inputs.file_path }}Dockerfile ${{ inputs.file_path }}
