@@ -1,0 +1,34 @@
+name: 'Tevel Buildx Config'
+description: 'Configuration action for Docker image buildx'
+inputs:
+  file_path:
+    description: path to dockerfile
+    required: false
+    default: "./"
+  image_name:
+    description: registry URL + repo (app name)
+    required: true
+  target_platform:
+    description: specifing platform amd64 / arm targt 
+    required: true
+    default: "linux/amd64"
+  tag_name:
+    Docker Image version
+    required: true
+outputs:
+  buildx_args:
+    description: "Docker buildx build args"
+    value: ${{ steps.prepare.outputs.buildx_args }}
+runs:
+  using: "composite"
+  steps: 
+    - name: Prepare
+      id: prepare
+      run: |
+        TAGS="--tag ${{ inputs.image_name }}:${{ inputs.tag_name }}"
+
+        echo ::set-output name=buildx_args::--platform ${{ inputs.target_platform }} \
+          --build-arg VERSION=${{ inputs.tag_name }} \
+          --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+          --build-arg VCS_REF=${GITHUB_SHA::8} \
+          ${TAGS} --file ${{ inputs.file_path }}/Dockerfile ${{ inputs.file_path }}
